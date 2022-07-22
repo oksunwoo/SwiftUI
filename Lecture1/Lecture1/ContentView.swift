@@ -8,33 +8,75 @@
 import SwiftUI
 
 struct ContentView: View {
-    var vehicleEmojis = ["🚂","🚘", "🛵", "🛸", "🛴", "🚍", "🚛", "🚞", "🚁", "🚔", "🛺", "🚐", "🚒", "🚑" ,"🚜"]
-    var sportEmojis = ["⚽️", "🏀", "🏈", "🥎", "⚾️", "🏓", "🤿", "🥊", "🏹", "🪀", "⛳️", "🎱", "🪃", "🏸", "🏒"]
-    var flagEmojis = ["🇬🇭", "🇬🇦", "🇬🇾", "🇬🇲", "🇬🇬", "🇬🇺", "🇬🇹", "🇰🇷", "🇳🇪", "🇱🇷", "🇺🇸", "🇧🇩" , "🇲🇾", "🇸🇧", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"]
+    @State var emojis = ["🚂","🚘", "🛵", "🛸", "🛴", "🚍", "🚛", "🚞", "🚁", "🚔", "🛺", "🚐", "🚒", "🚑" ,"🚜"," 🐸", "🐛", "🦋", "🚖", "🚝", "🚡"]
     @State var emojiCount = 4
     
     var body: some View {
         VStack{
-            Text("Memorize")
-                .font(.largeTitle)
             ScrollView{
+                Text("Memorize")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
-                    ForEach(vehicleEmojis[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojiCount].shuffled(), id: \.self) { emoji in
                         CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
                     }
                 }
             }
             .foregroundColor(.red)
             Spacer()
-            HStack {
-                remove
-                Spacer()
-                add
+            VStack {
+                HStack {
+                    vehicles
+                    Spacer()
+                    sports
+                    Spacer()
+                    flags
+                }
+                .padding()
+                HStack {
+                    remove
+                    Spacer()
+                    add
+                }
             }
             .font(.largeTitle)
             .padding(.horizontal)
         }
         .padding(.horizontal)
+    }
+    
+    var vehicles : some View {
+        Button {
+            emojis = ["🚂","🚘", "🛵", "🛸", "🛴", "🚍", "🚛", "🚞", "🚁", "🚔", "🛺", "🚐", "🚒", "🚑" ,"🚜"," 🐸", "🐛", "🦋", "🚖", "🚝", "🚡"]
+        } label: {
+            VStack {
+                Image(systemName: "car")
+                Text("Vehicles").font(.body)
+            }
+        }
+    }
+    
+    var sports : some View {
+        Button {
+            emojis = ["⚽️", "🏀", "🏈", "🥎", "⚾️", "🏓", "🤿", "🥊", "🏹", "🪀", "⛳️", "🎱", "🪃", "🏸", "🏒"]
+        } label: {
+            VStack {
+                Image(systemName: "sportscourt")
+                Text("Sports").font(.body)
+            }
+        }
+    }
+    
+    var flags : some View {
+        Button {
+            emojis = ["🇬🇭", "🇬🇦", "🇬🇾", "🇬🇲", "🇬🇬", "🇬🇺", "🇬🇹", "🇰🇷", "🇳🇪", "🇱🇷", "🇺🇸", "🇧🇩" , "🇲🇾", "🇸🇧", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"]
+        } label: {
+            VStack {
+                Image(systemName: "flag")
+                Text("Flags").font(.body)
+            }
+        }
     }
     
     var remove : some View {
@@ -49,7 +91,7 @@ struct ContentView: View {
     
     var add : some View {
         Button {
-            if emojiCount < vehicleEmojis.count {
+            if emojiCount < emojis.count {
                 emojiCount += 1
             }
         } label: {
