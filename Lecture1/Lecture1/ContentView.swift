@@ -33,12 +33,6 @@ struct ContentView: View {
                     Spacer()
                     flags
                 }
-                .padding()
-                HStack {
-                    remove
-                    Spacer()
-                    add
-                }
             }
             .font(.largeTitle)
             .padding(.horizontal)
