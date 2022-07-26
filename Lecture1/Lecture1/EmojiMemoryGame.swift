@@ -15,19 +15,19 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     static var themes: Array<Theme> = [
-        Theme(name: "vehicles",
+        Theme(name: "Vehicles",
               emojis: ["🚂","🚘", "🛵", "🛸", "🛴", "🚍", "🚛", "🚞", "🚁", "🚔", "🛺", "🚐", "🚒", "🚑" ,"🚜"," 🐸", "🐛", "🦋", "🚖", "🚝", "🚡"],
               pairCards: 10,
               color: "red"),
-        Theme(name: "sports",
+        Theme(name: "Sports",
               emojis: ["⚽️", "🏀", "🏈", "🥎", "⚾️", "🏓", "🤿", "🥊", "🏹", "🪀", "⛳️", "🎱", "🪃", "🏸", "🏒"],
               pairCards: 8,
               color: "yellow"),
-        Theme(name: "flags",
+        Theme(name: "Flags",
               emojis: ["🇬🇭", "🇬🇦", "🇬🇾", "🇬🇲", "🇬🇬", "🇬🇺", "🇬🇹", "🇰🇷", "🇳🇪", "🇱🇷", "🇺🇸", "🇧🇩" , "🇲🇾", "🇸🇧", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"],
               pairCards: 6,
               color: "blue"),
-        Theme(name: "plants",
+        Theme(name: "Plants",
               emojis: ["🍏", "🍎", "🍐", "🍊", "🍋", "🍌", "🍉", "🍇", "🍓", "🍈", "🍒", "🫐", "🍑", "🥭", "🍍", "🥥", "🥝", "🍅"],
               pairCards: 8,
               color: "green")
@@ -63,6 +63,10 @@ class EmojiMemoryGame: ObservableObject {
         default:
             return .black
         }
+    }
+    
+    var gamePoint: Int {
+        return model.score
     }
     
     //MARK: - Intent(s)
