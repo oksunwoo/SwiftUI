@@ -11,22 +11,31 @@ struct ContentView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-        ScrollView{
-            Text("Memorize")
-                .font(.largeTitle)
-                .foregroundColor(.white)
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
-                ForEach(viewModel.cards) { card in
-                    CardView(card: card)
-                        .aspectRatio(2/3, contentMode: .fit)
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
+        VStack {
+            ScrollView{
+                Text(viewModel.themeName)
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]) {
+                    ForEach(viewModel.cards) { card in
+                        CardView(card: card)
+                            .aspectRatio(2/3, contentMode: .fit)
+                            .onTapGesture {
+                                viewModel.choose(card)
+                            }
+                    }
                 }
             }
+            .foregroundColor(viewModel.cardColor)
+            .padding(.horizontal)
+            
+            Button {
+                viewModel.newGame()
+            } label: {
+                Text("New Game")
+                    .foregroundColor(.white)
+            }
         }
-        .foregroundColor(.red)
-        .padding(.horizontal)
     }
 }
 
@@ -52,61 +61,6 @@ struct CardView: View {
         }
     }
 }
-
-
-//var vehicles : some View {
-//    Button {
-//        emojis = ["🚂","🚘", "🛵", "🛸", "🛴", "🚍", "🚛", "🚞", "🚁", "🚔", "🛺", "🚐", "🚒", "🚑" ,"🚜"," 🐸", "🐛", "🦋", "🚖", "🚝", "🚡"]
-//    } label: {
-//        VStack {
-//            Image(systemName: "car")
-//            Text("Vehicles").font(.body)
-//        }
-//    }
-//}
-//
-//var sports : some View {
-//    Button {
-//        emojis = ["⚽️", "🏀", "🏈", "🥎", "⚾️", "🏓", "🤿", "🥊", "🏹", "🪀", "⛳️", "🎱", "🪃", "🏸", "🏒"]
-//    } label: {
-//        VStack {
-//            Image(systemName: "sportscourt")
-//            Text("Sports").font(.body)
-//        }
-//    }
-//}
-//
-//var flags : some View {
-//    Button {
-//        emojis = ["🇬🇭", "🇬🇦", "🇬🇾", "🇬🇲", "🇬🇬", "🇬🇺", "🇬🇹", "🇰🇷", "🇳🇪", "🇱🇷", "🇺🇸", "🇧🇩" , "🇲🇾", "🇸🇧", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"]
-//    } label: {
-//        VStack {
-//            Image(systemName: "flag")
-//            Text("Flags").font(.body)
-//        }
-//    }
-//}
-//
-//var remove : some View {
-//    Button {
-//        if emojiCount > 1 {
-//            emojiCount -= 1
-//        }
-//    } label: {
-//        Image(systemName: "minus.circle")
-//    }
-//}
-//
-//var add : some View {
-//    Button {
-//        if emojiCount < emojis.count {
-//            emojiCount += 1
-//        }
-//    } label: {
-//        Image(systemName: "plus.circle")
-//    }
-//}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
