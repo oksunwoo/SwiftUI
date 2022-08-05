@@ -12,22 +12,24 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         VStack {
-            ScrollView{
+            //ScrollView{
                 HStack {
                     Text(game.themeName).font(.largeTitle)
                     Spacer()
                     Text("Score: \(game.gamePoint)")
                 }.foregroundColor(.white)
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
-                    ForEach(game.cards) { card in
-                        CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                game.choose(card)
-                            }
+                //LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+                //    ForEach(game.cards) { card in
+            AspectVGrid(items: game.cards, aspectRatio: 2/3, content: { card in
+                CardView(card: card)
+                    .aspectRatio(2/3, contentMode: .fit)
+                    .onTapGesture {
+                        game.choose(card)
                     }
-                }
-            }
+            })
+            
+        }
+    }
             .foregroundColor(game.cardColor)
             .padding(.horizontal)
             
@@ -37,9 +39,9 @@ struct EmojiMemoryGameView: View {
                 Text("New Game")
                     .foregroundColor(.white)
             }
-        }
-    }
-}
+//        }
+//    }
+//}
 
 struct CardView: View {
     let card: EmojiMemoryGame.Card
